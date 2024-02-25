@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-notifications-cm
+  namespace: argocd
+data:
+  service.webhook.jenkins-demoapp: |
+    url: "http://192.168.101.41:8081/job/hello-world/build?token=demoapp"
+    basicAuth:
+      username: admin
+      password: "Linux@123"
+
+  trigger.on-deployed-jenkins-demoapp: |
+    when: app.status.operationState.phase in ['Succeeded'] and app.status.health.status == 'Healthy'
+    oncePer: app.status.sync.revision
+    send: [jenkins-demoapp-tmpl]
+
+  template.jenkins-demoapp-tmpl: |
+    webhook: |
+      jenkins-demoapp:
+        method: GET
