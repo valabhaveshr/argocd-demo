@@ -4,7 +4,7 @@ metadata:
   name: myapp-argo-application
   namespace: argocd
   annotations:
-    notifications.argoproj.io/subscribe.on-deployed-jenkins-demoapp.webhook: jenkins-demoapp
+    notifications.argoproj.io/subscribe.on-deployed.jenkins: ""
 spec:
   project: argo-jenkins-project
   source:
