@@ -10,3 +10,15 @@ data:
       username: $jenkins-username
       password: $jenkins-password
 
+  template.jenkins-params: |
+    webhook:
+      jenkins:
+        method: GET
+        body: name=Bhavesh&message="Hello World!!!"
+
+  trigger.on-deployed: |
+    - description: Application is synced and healthy. Triggered once per commit.
+      oncePer: app.status.sync.revision
+      send:
+      - jenkins-params
+      when: app.status.operationState.phase in ['Succeeded'] and app.status.health.status == 'Healthy'
