@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: demoapp
-        image: bhavesh2177/nginx-demo:v1.24
+        image: bhavesh2177/nginx-demo:v1.25
         ports:
         - containerPort: 80
